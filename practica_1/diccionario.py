@@ -6,8 +6,7 @@ caracteristicas = ["objeto", "persona", "lugar", "vivo", "animal", "tecnologico"
 "natural", "comestible", "transporte", "humano", "lugar_cerrado", "escribir", "entretenimiento",
 "pequenio", "grande", "antiguo", "util_diario","humano_creo","semillas","crece_tierra","animal_proviene","escuela","investigacion"
 ,"aportacion", "actual" ,"1900", "1800", "1700", "1600", "1500","inventor","artista","filosofo", "escritor","musico","politico",
-"empresario", "preparado","aprender"]
-
+"empresario", "preparado","aprender","pintor","oficina"]
 
 pensamiento = {
 
@@ -16,12 +15,12 @@ pensamiento = {
 	"lapiz" : {"objeto": True, "oficina": True, "escuela": True,  "escribir": True, "humano_creo":True},
 	"celular" : {"objeto": True, "tecnologico": True, "util_diario": True, "pequenio": True, "humano_creo": True, "escribir":True,"aprender":True},
 	"silla" : {"objeto": True, "humano_creo": True, "util_diario": True},
-	"automovil" : {"objeto": True, "transporte": True, "tecnologico":True, "humano_creo": True, "grande":True},
+	"automovil" : {"objeto": True, "transporte": True, "tecnologico":True, "humano_creo": True, "grande":True,"util_diario":True},
 	"balon" : {"objeto": True, "entretenimiento": True, "pequenio": True},
 	"teclado" : {"objeto": True, "escribir": True	, "tecnologico": True, "humano_creo": True, "util_diario": True, },
 	"reloj" : {"objeto":True, "tecnologico": True, "pequenio": True, "util_diario":True, "humano_creo": True},
-	"compudatora" : {"objeto": True, "tecnologico":True, "escribir":True, "entretenimiento": True, "util_diario":True,"humano_creo": True,"aprender":True },
-	"cubierto" : {"objeto": True,  "util_diario": True, "pequeno": True, "humano_creo":True},
+	"computadora" : {"objeto": True, "tecnologico":True, "escribir":True, "entretenimiento": True, "util_diario":True,"humano_creo": True,"aprender":True },
+	"cubierto" : {"objeto": True,  "util_diario": True, "pequenio": True, "humano_creo":True},
 	"television" : {"objeto": True, "tecnologico": True, "entretenimiento": True, "humano_creo": True},
 	"fruta" : {"objeto": True, "comestible": True, "natural": True, "semillas":True},
 	"verdura" : {"objeto": True, "comestible": True, "natural":True},
@@ -62,14 +61,14 @@ pensamiento = {
 	"Fourier": {"persona": True, "famoso": True, "aportacion":True, "1700":True, "1800":True},
 	"Laplace": {"persona": True, "famoso":True, "aportacion":True,"1700":True, "1800": True},
 	"Curie": {"persona": True, "famoso": True, "aportacion": True, "cientifico": True, "1900": True},
-	"Tesla": {"persona": True, "famoso": True, "aportacion": True, "inventor": True, "cientifico": True, "1800": True, "siglo_XX": True},
+	"Tesla": {"persona": True, "famoso": True, "aportacion": True, "inventor": True, "cientifico": True, "1800": True, "1900": True},
     "Edison": {"persona": True, "famoso": True, "aportacion": True, "inventor": True, "1800": True, "1900": True},
     "Da Vinci": {"persona": True, "famoso": True, "aportacion": True, "inventor": True, "artista": True, "cientifico": True, "1500": True, "siglo_XVI": True},
 	"Picasso": {"persona": True, "famoso": True, "artista": True, "1900": True, "pintor": True},
     "Van Gogh": {"persona": True, "famoso": True, "artista": True, "1800": True, "pintor": True},
     "Camus": {"persona": True, "famoso": True, "escritor": True, "1900": True, "filosofo": True}, 
     "Schopenhauer": {"persona": True, "famoso":True, "escritor":True, "1800":True, "1700": True, "filosofo": True},
-    "Jhon Lennon": {"persona": True, "famoso": True, "escritor":True, "1900":True, "artista": True, "musico": True},
+    "John Lennon": {"persona": True, "famoso": True, "escritor":True, "1900":True, "artista": True, "musico": True},
     "Thom Yorke": {"persona":True, "famoso":True, "escritor": True, "1900":True, "2000":True, "musico":True, "artista":True},
     "Gustavo Cerati": {"persona":True, "famoso":True, "escritor":True, "1900":True, "2000":True, "musico":True, "artista":True},
   	"Charly Garcia": {"persona": True, "famoso": True, "escritor": True, "1900":True, "2000":True, "musico":True, "artista":True},
@@ -107,7 +106,7 @@ preguntas = {
 	"escuela": "¿Es una escuela? (s/n): ",
 	"investigacion": "¿Es un centro de investigacion? (s/n): ",
 	"aportacion": "¿La persona hizo alguna aportacion a la ciencia o tecnologia? (s/n): ",
-	"actual" : "¿La persona es de la epoca contemporane (1980-2000)? (s/n): ",
+	"actual" : "¿La persona es de la epoca contemporane (1980-2025)? (s/n): ",
 	"1900": "¿La persona estuvo vivo durante los anios entre  1900-1980)? (s/n): ",
 	"1800": "¿La persona estuvo vivo durante los anios entre 1800-1900)? (s/n): ",
 	"1700": "¿La persona estuvo vivo durante los anios entre 1700-1800)? (s/n): ",
@@ -120,7 +119,9 @@ preguntas = {
 	"musico": "¿La persona es un musico? (s/n): ",	
 	"politico": "¿La persona es un politico o esta relacionad con la politica? (s/n):",
 	"empresario": "¿La persona es un empresario? (s/n):",
-	"preparado": "¿Es un alimento preparado? (s/n):"
+	"preparado": "¿Es un alimento preparado? (s/n):",
 	"aprender": "¿Es un objeto que sirve para aprender? (s/n): ",
+	"pintor": "¿La persona es un pintor? (s/n): ",
+	"oficina": "¿El objeto se puede encontrar en alguna oficina	? (s/n): "
 	}
 
