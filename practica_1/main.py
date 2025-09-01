@@ -120,6 +120,7 @@ class Juego_20Q:
             self.filtrar_objetos()
 
             print(f"Posibilidads restantes: {len(self.objetos_posibles)}")
+            print(f"Numero de preguntas realizadas: {preguntas_realizadas}\n")
 
             if len(self.objetos_posibles) <=3:
                 if self.adivinar():
@@ -128,17 +129,23 @@ class Juego_20Q:
                     break
 
         car = False
+        i = 0
         if len(self.objetos_posibles) > 1:
             print("\nSe me acabaron las preguntas. ¿Acaso estabas pensando en algo de estos?")
-            for i, objeto in enumerate(self.objetos_posibles, 1):
-                op = input(f"¿Acaso estabas pensando en {objeto}?").lower()
-                if op in ['s', 'si', 'yes', 'y']:
-                    print("Adivine, GG ez win")
-                    car = True
-                    break
-                    return
-                elif op in ['n', 'no']:
-                    continue            
+            while  i < len(self.objetos_posibles) and not car:
+                objeto = self.objetos_posibles[i]
+                while True:
+                    op = input(f"¿Acaso estabas pensando en {objeto} (s/n)?").lower().strip()
+
+                    if op in ['s', 'si', 'yes', 'y']:
+                        print("Adivine, GG ez win.")
+                        car = True
+                        break
+                    elif op in ['n','no']: 
+                        break
+                    else:
+                        print("Opcion no valida, por favor ingresa una opcion valida (s/n).")
+                i += 1  
         if not car:
             print("Haz acabado con mi base de conocimientos, ganaste.GG")
 
