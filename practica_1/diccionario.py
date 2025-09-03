@@ -111,7 +111,7 @@ pensamiento = {
 	"drake": {"persona": True, "musica": True, "famoso": True},
 	"justin bieber": {"persona": True, "musica": True, "famoso": True},
 	"the weeknd": {"persona": True, "musica": True, "famoso": True},
-
+	"Kabezuko" : {"persona": True, "vivo": True, "musica":True, "inteligente": True, "2000":True, "artista": True},
     # Animales
     "perro": {"animal": True, "vivo": True, "animal_domestico": True},
     "gato": {"animal": True, "vivo": True, "animal_domestico": True},
