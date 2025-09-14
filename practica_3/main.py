@@ -36,7 +36,7 @@ bebidas_alc= [
     "azulito",
     "lean",
     "thom collins (solo para paladares educados)",
-    "cerveza[s] (variedad)"
+    "cerveza[s] (variedad)",
     "tequila",
     "cantarito",
     "vino tinto",
@@ -49,7 +49,10 @@ bebidas_alc= [
     "mojito",
     "cosmopolitan",
     "old fashioned",
-    "daiquiri"
+    "daiquiri",
+    "beileys de pobres",
+    "bucaña",
+    "amazul"
 ]
 
 comidas_op = [
@@ -65,6 +68,17 @@ comidas_op = [
     "mariscos"
 ]
 
+act_niños = [
+    "juegos en la piscina",
+    "manualidades y dibujo",
+    "mini club infantil",
+    "clases de cocina para niños",
+    "búsqueda del tesoro",
+    "noche de cine con palomitas",
+    "deportes en el jardín (fútbol, voleibol)",
+    "espectáculos de magia o marionetas",
+    "sesión de karaoke"
+]
 
 def leer_expresiones_regulares(ruta_archivo="expresiones_chatbot_hoteles.csv"):
     patrones = {}
@@ -94,6 +108,18 @@ def calcular_similitud(user_input, patrones, pesos):
     return intencion_detectada, max_peso
 
 
+def actividades_niños(patrones, pesos):
+    user_input = input("¿Deseas conocer las opciones de entrenimento para niños?")
+    intencion_detectada, max_peso = calcular_similitud(user_input, patrones, pesos)
+    if intencion_detectada == "afirmacion":
+        print("\nClaro, estas son las actividades:")
+        for i in act_niños:
+            print(i)
+        print("Hoss: ¿En qué más puedo ayudarte?")
+    else:
+        print("Hoss: ¿En qué más puedo ayudarte?")
+
+
 def mostrar_comidas(patrones,pesos):
     op = input("¿Deseas conocer la variedad de comidas que ofrecemos?")
     intencion_detectada , max_peso = calcular_similitud(op,patrones,pesos)
@@ -115,10 +141,10 @@ def mostrar_bar(patrones,pesos):
     intencion_detectada, max_peso = calcular_similitud(user_input, patrones, pesos)
     if intencion_detectada == "afirmacion":
         print("Claro, esto es lo que ofrecemos en el bar(pueden variara según la temporada y disponibilidad).")
-        print("Bebidas(solo para mayores de edad, todo con medida): ")
+        print("\n\nBebidas(solo para mayores de edad, todo con medida): ")
         for i in bebidas_alc:
             print(i)
-        print("Hoss: ¿En qué más puedo ayudarte?")
+        print("\nHoss: ¿En qué más puedo ayudarte?")
     else:
         print("Hoss: ¿En qué más puedo ayudarte?")
 
@@ -313,9 +339,9 @@ def chatbot_hoteles(patrones, pesos):
             continue
         elif intencion_detectada == "servicios":
             servicios_respuestas = [
-                "Hoss: Nuestro hotel ofrece accesibilidad para discapacitados, Wi-Fi gratuito, desayuno incluido, spa, gimnasio, piscina, restaurante bar, parking, servicio de habitaciones 24 horas y espacios para niños.",
+                "Hoss: Nuestro hotel ofrece accesibilidad para discapacitados, Wi-Fi gratuito, desayuno incluido, spa, gimnasio, piscina, restaurante, bar, parking, servicio de habitaciones 24 horas y espacios para niños.",
                 "Hoss: Contamos con servicios como acceso a discapacitados, Wi-Fi, desayuno, spa, gimnasio, piscina, restaurante, bar, estacionamiento gratuito y espacios para niños.",
-                "Hoss: Puedes disfrutar de Wi-Fi, desayuno buffet, spa, gimnasio, piscina, restaurante bar, parking y espacios para niños sin costo adicional.",
+                "Hoss: Puedes disfrutar de Wi-Fi, desayuno buffet, spa, gimnasio, piscina, restaurante, bar, parking y espacios para niños sin costo adicional.",
                 "Hoss: Ofrecemos accesibilidad para discapacitados,Wi-Fi, desayuno, spa, gimnasio, piscina, restaurante, bar, parking, servicio de habitaciones todo el día y espacios para niños.",
             ]
             print(random.choice(servicios_respuestas))
@@ -328,6 +354,7 @@ def chatbot_hoteles(patrones, pesos):
                 "Hoss: Sí, puedes hospedarte con tus hijos. Tenemos servicios y espacios diseñados para familias.",
             ]
             print(random.choice(niños_respuestas))
+            actividades_niños(patrones,pesos)
             continue
         elif intencion_detectada == "wifi":
             wifi_respuestas = [
