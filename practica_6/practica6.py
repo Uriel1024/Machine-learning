@@ -14,7 +14,8 @@ RANDOM_STATE = 42
 path_mall_costumers = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3-zrTL0T9NSuA9BKqrs1JR2UxLI6-faydh4eUo91In88M4DgVaogIxbHeUN0UamV0-j1S25KLbBpg/pub?gid=2104197020&single=true&output=csv"
 
 data_iris = load_iris()
-x_iris, y_iris = data_iris.data, data_iris.feature_names
+x_iris, y_iris, z_iris  = data_iris.data, data_iris.feature_names, data_iris.target
+
 
 x_blobs, y_blobs = make_blobs(n_samples = 300,centers = 3,cluster_std = 1.0,random_state = RANDOM_STATE)  
 
@@ -58,14 +59,56 @@ def entrenamiento(data_x, df, dataset):
 		plt.show()
 
 
+def plot_iris(x_iris, y_iris):
+	pca = PCA(n_components=2)
+	# Ajustamos el modelo a nuestros datos escalados y los transformamos
+	X_pca = pca.fit_transform(x_iris)
 
+	print(f"Dimensiones de los datos despues de PCA: {X_pca.shape}")
+
+	df_pca = pd.DataFrame(data=X_pca, columns=['Componente Principal 1', 'Componente Principal 2'])
+	df_pca['Especie'] = y_iris
+
+	#Mapeamos los números de las especies a sus nombres para la leyenda
+	species_map = {0: 'Setosa', 1: 'Versicolor', 2: 'Virginica'}
+	df_pca['Especie'] = df_pca['Especie'].map(species_map)
+
+	# Creamos el gráfico de dispersión
+	plt.figure(figsize=(10, 7))
+	sns.scatterplot(
+	    x='Componente Principal 1',
+	    y='Componente Principal 2',
+	    hue='Especie',
+	    data=df_pca,
+	    palette='viridis',
+	    s=100, # Tamaño de los puntos
+	    alpha=0.8 # Transparencia
+	)
+
+	plt.title('Dataset Iris reducido a 2 Dimensiones con PCA')
+	plt.xlabel('Componente Principal 1')
+	plt.ylabel('Componente Principal 2')
+	plt.legend(title='Especie de Iris')
+	plt.grid(True)
+	plt.show()
+
+def plot_blobs_moons(x, dataset):
+	plt.scatter(x[:, 0], x[:, 1], s=50, c='gray', marker='o', edgecolor='k')
+	plt.title(f"Informacion generada del dataset {dataset}")
+	plt.xlabel("Feature 1")
+	plt.ylabel("Feature 2")
+	plt.show()
 
 if __name__ == "__main__":
 
+	#para el iris dataset
+	plot_iris(x_iris,z_iris)
 	entrenamiento(x_iris,df_iris,"iris")
 
 	#para mostrar el bobs dataset 
+	plot_blobs_moons(x_blobs,"blobs")
 	entrenamiento(x_blobs,df_blobs,"blobs")
 	#para mostrar el moon dataset
+	plot_blobs_moons(x_moons,"moons")
 	entrenamiento(x_moons,df_moons,"moons")
 
