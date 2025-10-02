@@ -29,7 +29,11 @@ df_moons = pd.DataFrame(x_moons)
 
 def entrenamiento(data_x, df, dataset):	
 	modelos = {
-		"KMeans":  KMeans(n_clusters =3, random_state = RANDOM_STATE)
+		"KMeans":  KMeans(n_clusters =3, random_state = RANDOM_STATE, n_init = 'auto'),
+		"SpectralClustering": SpectralClustering(n_clusters=2, assign_labels='discretize',random_state=RANDOM_STATE),
+		"DBSCAN":  DBSCAN(eps=0.3, min_samples=10), 
+		"Birch": Birch(n_clusters=None), 
+		"AgglomerativeClustering": AgglomerativeClustering(n_clusters = 3 )
 	}	
 
 	for nombre,model in modelos.items():
@@ -47,11 +51,7 @@ def entrenamiento(data_x, df, dataset):
 		        reduced_data[model.labels_ == cluster, 1],
 		        label=f"Cluster {cluster}"
 		    )
-
-		# Plot cluster centers
-		centers = pca.transform(model.cluster_centers_)
-		plt.scatter(centers[:, 0], centers[:, 1], c='red', marker='.', s=200, label='Centroids')
-
+		
 		plt.title(f"{nombre} Clustering en el {dataset} Dataset (PCA Reduced)")
 		plt.xlabel("Principal Component 1")
 		plt.ylabel("Principal Component 2")
