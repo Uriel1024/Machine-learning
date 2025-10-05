@@ -1,13 +1,14 @@
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.linear_model import LinearRegression
+from sklearn.neural_network import MLPRegressor
 import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestRegressor
 import pandas as pd
 import numpy as np
 from datetime import datetime
-
-
-
+from IPython.display import display
 
 #normaliza los datos 
 def limpiar_datos(df):
@@ -43,6 +44,8 @@ RM = 42
 #Limpiamos los datos antes de particionar para el modelo
 data = 	limpiar_datos(data)
 
+data = data.dropna()
+
 #dividimos  80/20 el dataset 
 target = "Temperatura"
 excluidas = ['Fecha_Registro', 'Hora','Timestamp', target]
@@ -50,7 +53,7 @@ x = data.drop(columns=excluidas, errors = 'ignore')
 y = data[target]
 
 
-
+#Por el tipo de dataset no ocupamos el train_test_split, si no iloc para particionarlo y poder trabajarlo 
 #x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = .2, random_state = RM)
 # Entrenamiento: Filas antiguas (80% del inicio)
 train_size = int(0.8 * len(data))
@@ -63,16 +66,29 @@ x_test = x.iloc[train_size:]
 y_test = y.iloc[train_size:]
 
 def entrenamiento():
-	RMR = RandomForestRegressor(max_depth = 6, random_state = RM)
-	RMR.fit(x_train, y_train)
-	y_pred = RMR.predict(x_test)
+	modelos = {
+		"RandomForestRegressor": RandomForestRegressor(max_depth = 6, random_state = RM),
+		"KNeighborsRegressor": KNeighborsRegressor(),
+		"LinearRegression": LinearRegression(),
+    	"MLPRegressor": MLPRegressor(max_iter=1000,random_state=42)
+	}
 
-	return  mean_squared_error(y_test, y_pred) ,r2_score(y_test, y_pred)
+	rest = {"Modelo": [], "R2": [], "MSE": []}
+	for nombre, modelo in modelos.items():
+		modelo.fit(x_train, y_train)
+		y_pred = modelo.predict(x_test)
+		r2 = r2_score(y_test,y_pred)
+		mse = mean_squared_error(y_test,y_pred)
+
+		rest["Modelo"].append(nombre)
+		rest["R2"].append(r2)
+		rest["MSE"].append(mse)
+
+
+	return rest
 
 
   
 if __name__ == "__main__":
-	mse, r2 = entrenamiento()
-	print(f"\nEl MSE del modelo es: {mse}")
-	print(f"\nEl r2 del modelo es: {r2}")
-
+	resultados = entrenamiento()
+	display(resultados)
