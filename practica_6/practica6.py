@@ -1,4 +1,4 @@
-#importamos las librerias necesarias y los dataset 
+#	importamos las librerias necesarias y los dataset 
 from sklearn.cluster import KMeans, SpectralClustering, DBSCAN, Birch, AgglomerativeClustering
 import pandas as pd
 import numpy as np
@@ -10,8 +10,8 @@ import seaborn as sns
 
 RANDOM_STATE = 42
 
-#precargamos las variables de los dataset para poder trabajarlos 
-path_mall_costumers = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3-zrTL0T9NSuA9BKqrs1JR2UxLI6-faydh4eUo91In88M4DgVaogIxbHeUN0UamV0-j1S25KLbBpg/pub?gid=2104197020&single=true&output=csv"
+
+
 
 data_iris = load_iris()
 x_iris, y_iris, z_iris  = data_iris.data, data_iris.feature_names, data_iris.target
