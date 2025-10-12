@@ -7,7 +7,7 @@ from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-
+import seaborn as sns
 
 data_wine = load_wine()
 data_iris = load_iris()
@@ -239,7 +239,7 @@ def graficar_resultados_iguana(df):
 
 
 if __name__ == '__main__':
-	validacion_cruzada()
-	validacion_70()
-	overfitting()
+	#validacion_cruzada()
+	#validacion_70()
+	#overfitting()
 	iguana()
