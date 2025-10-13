@@ -4,7 +4,7 @@ caracteristicas = ["objeto", "persona", "lugar", "vivo", "animal", "tecnologico"
 "pequenio", "grande", "antiguo", "util_diario","humano_creo","semillas","crece_tierra","animal_proviene","escuela","investigacion"
 ,"aportacion", "actual" ,"1900", "1800", "1700", "1600", "1500","inventor","artista","filosofo", "escritor","musico","politico",
 "empresario", "preparado","aprender","pintor","oficina", "ficcion", "animal_domestico", "deporte", "musica", "arte", 
-"pelicula", "historia", "espacio", "cientifico", "siglo_XVI", "2000", "inteligente", "activista"]
+"pelicula", "historia", "espacio", "cientifico", "siglo_XVI", "2000", "inteligente", "activista","nezayork"]
 
 pensamiento = {
 
@@ -111,7 +111,7 @@ pensamiento = {
 	"drake": {"persona": True, "musica": True, "famoso": True},
 	"justin bieber": {"persona": True, "musica": True, "famoso": True},
 	"the weeknd": {"persona": True, "musica": True, "famoso": True},
-	"Kabezuko" : {"persona": True, "vivo": True, "musica":True, "inteligente": True, "2000":True, "artista": True},
+	"Kabezuko" : {"persona": True, "vivo": True, "musica":True, "inteligente": True, "2000":True, "artista": True,"nezayork": True},
     # Animales
     "perro": {"animal": True, "vivo": True, "animal_domestico": True},
     "gato": {"animal": True, "vivo": True, "animal_domestico": True},
@@ -405,5 +405,6 @@ preguntas = {
     "negativo": "¿Es un sentimiento negativo? (s/n): ",
     "intenso": "¿Es un sentimiento muy intenso? (s/n): ",
     "comun": "¿Es un sentimiento común en la mayoría de las personas? (s/n): ",
+    "nezayork": "¿la persona vive, vivio o es originario de nezayork? (s/n)",
 	}
 

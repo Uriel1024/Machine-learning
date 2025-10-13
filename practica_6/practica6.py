@@ -10,6 +10,8 @@ import seaborn as sns
 
 RANDOM_STATE = 42
 
+#precargamos las variables de los dataset para poder trabajarlos 
+path_mall_costumers = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3-zrTL0T9NSuA9BKqrs1JR2UxLI6-faydh4eUo91In88M4DgVaogIxbHeUN0UamV0-j1S25KLbBpg/pub?gid=2104197020&single=true&output=csv"
 
 
 
