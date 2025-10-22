@@ -239,6 +239,6 @@ def graficar_resultados_iguana(df):
 
 if __name__ == '__main__':	
 	validacion_cruzada()
-	validacion_70()
+	validacion_70()                        y9ki,,,8uuuu ,mA
 	overfitting()
 	iguana()
