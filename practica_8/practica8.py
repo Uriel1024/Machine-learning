@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 from IPython.display import display
+from datetime import datetime
 
 #link para cargar el dataset de info 
 
@@ -16,8 +17,8 @@ path  = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS8OmjUXLoRFS9QAXSjoSOo
 data = pd.read_csv(path)
 
 RM = 42
-
 data['time'] = pd.to_datetime(data['time'])
+
 
 #Las caracteristicas numericas en otro formato 
 data['day_of_year'] = data['time'].dt.day_of_year
@@ -66,6 +67,10 @@ def predecir_temperatura(modelos, fecha_hora):
 
 	return prediccion[0]
 	
+def obtener_hora():
+	ahora = datetime.now()
+	dia_hora = ahora.strftime("%Y-%m-%d %H:%M:%S")
+	return dia_hora
 
 if __name__ == "__main__":
 	resultados, modelo  = entrenamiento()
@@ -73,8 +78,9 @@ if __name__ == "__main__":
 	print("--- Resultados del Entrenamiento ---")
 	display(resultados)
 
-	fecha_a_predecir =  input('Ingresa la fecha y la hora en formato AAAA-MM-DD HH-MM-SS:   \n')
+	fecha_a_predicir = obtener_hora()
+	print(f'La fecha y hora para predecir el clima es: {fecha_a_predicir}')
 
-	temperatura = predecir_temperatura(modelo,fecha_a_predecir)
+	temperatura = predecir_temperatura(modelo,fecha_a_predicir)
     
 	print(f"Temperatura es de : {temperatura:.2f} °C")
