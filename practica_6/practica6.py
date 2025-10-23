@@ -1,4 +1,4 @@
-#	importamos las librerias necesarias y los dataset 
+#importamos las librerias necesarias y los dataset 
 from sklearn.cluster import KMeans, SpectralClustering, DBSCAN, Birch, AgglomerativeClustering
 import pandas as pd
 import numpy as np
