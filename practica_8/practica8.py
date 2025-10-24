@@ -12,17 +12,37 @@ from IPython.display import display
 from datetime import datetime
 
 #link para cargar el dataset de info 
+#dataset con 70k  columnas
+#path = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQd-ZG6O9T3emRFPnMACWcOSfMhz--ApCo6IpeSnpB2tVccQWb8Tj0ZZg-KFLg7MMyQ8tqVcgfQuMAB/pub?gid=957169904&single=true&output=csv"
 
+#dataset con 10k columnas
+#path = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRmtY0s_xS_QAoBNqwkFZwPknKPu0aR1FSykGDvxkclAwPjMjS8lWT9E9Bv5sIr3tHgGymrerwRKvsX/pub?gid=957169904&single=true&output=csv"
+
+
+#dataset con 50k columnas
 path  = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS8OmjUXLoRFS9QAXSjoSOoZf2Jq23hB01r84dY8WKqVO5ZHWQSIrYJZ_SwfOVJF_WFC0bOgO7A2Rr1/pub?gid=745592261&single=true&output=csv"
+
+
+#las coordenadas de la gam 
+latitud = 19.4829
+longitud = -99.1135
+RM = 42
+
 data = pd.read_csv(path)
 
-RM = 42
+
+
 data['time'] = pd.to_datetime(data['time'])
 
 
 #Las caracteristicas numericas en otro formato 
+
+
 data['day_of_year'] = data['time'].dt.day_of_year
 data['hour'] = data['time'].dt.hour
+
+
+
 x = data[['day_of_year', 'hour']]
 y = data['temperature_2m (°C)']
 
@@ -32,11 +52,11 @@ x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=.2,random_stat
 #funcion para entrenar los modelos 
 def entrenamiento():
 	
-	#modelo   = RandomForestRegressor(max_depth = 6, random_state = RM)
+	modelo   = RandomForestRegressor(max_depth = 6, random_state = RM)
 	#modelo = KNeighborsRegressor()
 	#modelo = LinearRegression()	
     
-	modelo =  MLPRegressor(max_iter=2000,random_state=RM)
+	#modelo =  MLPRegressor(max_iter=2000,random_state=RM)
 
 
 	rest = {"Modelo": [], "R2": [], "MSE": []}
