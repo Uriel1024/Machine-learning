@@ -20,7 +20,7 @@ from datetime import datetime
 
 
 #dataset con 50k columnas
-path  = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS8OmjUXLoRFS9QAXSjoSOoZf2Jq23hB01r84dY8WKqVO5ZHWQSIrYJZ_SwfOVJF_WFC0bOgO7A2Rr1/pub?gid=745592261&single=true&output=csv"
+#path  = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS8OmjUXLoRFS9QAXSjoSOoZf2Jq23hB01r84dY8WKqVO5ZHWQSIrYJZ_SwfOVJF_WFC0bOgO7A2Rr1/pub?gid=745592261&single=true&output=csv"
 
 
 #las coordenadas de la gam 
