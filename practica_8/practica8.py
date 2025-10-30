@@ -10,6 +10,10 @@ import numpy as np
 from datetime import datetime
 from IPython.display import display
 from datetime import datetime
+import math
+
+#al probar los 3 datasets, el de 50k es el mejor 
+
 
 #link para cargar el dataset de info 
 #dataset con 70k  columnas
@@ -18,9 +22,8 @@ from datetime import datetime
 #dataset con 10k columnas
 #path = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRmtY0s_xS_QAoBNqwkFZwPknKPu0aR1FSykGDvxkclAwPjMjS8lWT9E9Bv5sIr3tHgGymrerwRKvsX/pub?gid=957169904&single=true&output=csv"
 
-
 #dataset con 50k columnas
-#path  = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS8OmjUXLoRFS9QAXSjoSOoZf2Jq23hB01r84dY8WKqVO5ZHWQSIrYJZ_SwfOVJF_WFC0bOgO7A2Rr1/pub?gid=745592261&single=true&output=csv"
+path  = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS8OmjUXLoRFS9QAXSjoSOoZf2Jq23hB01r84dY8WKqVO5ZHWQSIrYJZ_SwfOVJF_WFC0bOgO7A2Rr1/pub?gid=745592261&single=true&output=csv"
 
 
 #las coordenadas de la gam 
@@ -52,7 +55,7 @@ x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=.2,random_stat
 #funcion para entrenar los modelos 
 def entrenamiento():
 	
-	modelo   = RandomForestRegressor(max_depth = 6, random_state = RM)
+	modelo   = RandomForestRegressor(random_state = RM)
 	#modelo = KNeighborsRegressor()
 	#modelo = LinearRegression()	
     
@@ -102,5 +105,14 @@ if __name__ == "__main__":
 	print(f'La fecha y hora para predecir el clima es: {fecha_a_predicir}')
 
 	temperatura = predecir_temperatura(modelo,fecha_a_predicir)
-    
-	print(f"Temperatura es de : {temperatura:.2f} °C")
+
+	print(f"La temperatura es de {temperatura} °C")
+
+	#en caso de que no nos cuadre lo redondeamos gg
+	"""
+	decimales = temperatura - int(temperatura)
+	if decimales >= .5:
+		print(f"La temperatura es de: {math.ceil(temperatura)} °C")
+	else:
+		print(f"La temperatura es de: {math.floor(temperatura)} °C")
+	"""
