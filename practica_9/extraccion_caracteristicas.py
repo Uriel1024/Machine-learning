@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn.utils import Bunch
@@ -9,12 +8,15 @@ from sklearn.decomposition import PCA
 import os
 import glob
 from pathlib import Path
+
+	
 #para no tener problemas con las rutas gg
 BASE_DIR = Path(__file__).resolve().parent.parent
 path  = BASE_DIR /"practica_9/frutas/train"
 
-#para poder usar un tamanio estandar de las imgs  y pasarlas a vectores
-def segmentacion(dim = (300,300)):
+size_pi = 64
+
+def segmentacion(dim = (size_pi,size_pi)):
 	#para guaradar las carpetas
 	carpetas = [nombre for nombre in os.listdir(path) if  os.path.isdir(os.path.join(path, nombre))]
 	imgs = [img for img in glob.glob(str(path) + "/*/*.jpg")]
@@ -44,12 +46,11 @@ def segmentacion(dim = (300,300)):
 
 
 			#las img muy peqenias no se pueden redimensionar bien
-			if height < 300 and width < 300:
+			if height < size_pi and width < size_pi:
 				print(f"la imagen {j} es demasiado pequenia y se omite")
 				continue
 
 			imagen_redim = resize(imagen, dim)
-			# ESTE BLOQUE TENÍA EL ERROR DE IDENTACIÓN (Se han normalizado los espacios)
 			if imagen_redim.shape != expected_image_shape:
 				print(f"La imagen {j} no tiene la forma esperada despues de redimensionar y se omite")
 				continue
@@ -59,6 +60,7 @@ def segmentacion(dim = (300,300)):
 			target.append(carpetas.index(os.path.basename(os.path.dirname(j))))
 
 			nombre_clase = os.path.basename(os.path.dirname(j))
+			if iter % 20 == 0:
 			print(f"procesada la imagen {j} de la clase {nombre_clase}")
 		
 		except ValueError:
@@ -68,26 +70,14 @@ def segmentacion(dim = (300,300)):
 			print(f"error al procesar la imagen {j}: {e}")
 			continue
 		iter += 1
-		if iter == 200:
-			break
+
 	print(f"Total de imgs procesaedas es de:{len(data)}")
 
 	#devolvemos un objeto tipo bunch con los datos
 
 	return Bunch(data = np.array(data), target = np.array(target), images = np.array(images), target_names = carpetas)
 
+
 if __name__ == '__main__':
 	data = segmentacion()
 	print(data.data.shape)
-
-	#usamos PCA para reducir la dimensionalidad y bajar el costo computacional
-	X = data.data
-
-	print(f"Forma de los datos {data}")
-	
-	#se debe variar para encontrar un balance entre precision y tiempo de computo
-	n_components = 100
-	pca = PCA(n_components=n_components)
-	X_reduced = pca.fit_transform(X)
-
-	print(f"Datos reducidos con PCA: {X_reduced.shape}")
