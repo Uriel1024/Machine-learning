@@ -55,9 +55,9 @@ x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=.2,random_stat
 #funcion para entrenar los modelos 
 def entrenamiento():
 	
-	modelo   = RandomForestRegressor(random_state = RM)
+	#modelo   = RandomForestRegressor(random_state = RM)
 	#modelo = KNeighborsRegressor()
-	#modelo = LinearRegression()	
+	modelo = LinearRegression()	
     
 	#modelo =  MLPRegressor(max_iter=2000,random_state=RM)
 

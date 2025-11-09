@@ -45,8 +45,10 @@ print(data)
 x_train, x_test, y_train, y_test = train_test_split(x,y,test_size = .25, random_state =	 rm)
 
 def entrenamiento():
-	modelo = RandomForestRegressor(max_depth = 50, random_state = rm)
-
+	modelo = LinearRegression()
+	#modelo = RandomForestRegressor(max_depth = 100, n_estimators = 10, random_state = rm)
+	#modelo = MLPRegressor()
+	#modelo = KNeighborsRegressor()
 	rest = {"modelo": [], "R2": [], "MSE": []}
 	modelo.fit(x_train,y_train)
 	y_pred = modelo.predict(x_test)
@@ -116,9 +118,9 @@ if __name__ == '__main__':
 	
 	caracteristicas = obtener_pronostico(dia_hora)
 	
-	if caracteristicas is not None:
+	if caracteristicas is 	not None:
 		entrada = pd.DataFrame([caracteristicas], columns=features)
 		prediccion = modelo.predict(entrada)[0]
-		print(f"La temperatura es de {prediccion:.2f} C")
+		print(f"La temperatura es de {prediccion} C")
 	else:
 		print("No fue posible obtener la temperatura.")
