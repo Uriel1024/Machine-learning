@@ -8,11 +8,12 @@ from sklearn.decomposition import PCA
 import os
 import glob
 from pathlib import Path
-
+from IPython.display import display
 	
 #para no tener problemas con las rutas gg
 BASE_DIR = Path(__file__).resolve().parent.parent
-path  = BASE_DIR /"practica_9/frutas/train"
+clase = "fruits	"
+path  = BASE_DIR /f"practica_9/pruebas/train/{clase}"
 
 size_pi = 64
 
@@ -61,7 +62,7 @@ def segmentacion(dim = (size_pi,size_pi)):
 
 			nombre_clase = os.path.basename(os.path.dirname(j))
 			if iter % 20 == 0:
-			print(f"procesada la imagen {j} de la clase {nombre_clase}")
+				print(f"procesada la imagen {j} de la clase {nombre_clase}")
 		
 		except ValueError:
 			print(f"error, la clase {nombre_clase} no se encuentra en las carpetas")
@@ -77,7 +78,42 @@ def segmentacion(dim = (size_pi,size_pi)):
 
 	return Bunch(data = np.array(data), target = np.array(target), images = np.array(images), target_names = carpetas)
 
+def guardar_csv(data_bunch, nombre_archivo=f"validation_{clase}.csv"):
+    archivo = f"{path}/{nombre_archivo}"
+
+    df_nuevo = pd.DataFrame(data_bunch.data)
+    
+   
+    df_nuevo['target'] = data_bunch.target
+
+    if os.path.exists(archivo):
+        try:
+
+            df_existente = pd.read_csv(archivo)
+            
+    
+            df_final = pd.concat([df_existente, df_nuevo], axis=1)
+
+            df_final.to_csv(archivo, index=False)
+            print(f"Datos añadidos como nuevas columnas a: {archivo}")
+
+        except pd.errors.EmptyDataError:
+
+            df_nuevo.to_csv(archivo, index=False)
+            print(f"Archivo existente vacío, guardando datos iniciales en: {archivo}")
+        except Exception as e:
+            print(f"Error al leer/procesar el CSV existente: {e}. Guardando el nuevo DataFrame por separado.")
+
+            df_nuevo.to_csv(archivo, index=False)
+            
+    else:
+       
+        df_nuevo.to_csv(archivo, index=False)
+        print(f"Archivo creado y datos iniciales guardados en: {archivo}")
+	
+
 
 if __name__ == '__main__':
 	data = segmentacion()
 	print(data.data.shape)
+	guardar_csv(data)
