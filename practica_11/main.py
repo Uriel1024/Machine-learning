@@ -13,7 +13,7 @@ def generar_laberinto(filas, columnas):
 
     for i in range(filas):            
         if random.random() >= .3:
-            fil, col = random.randint(6,columnas -2 ) ,  random.randint(6,columnas-2)
+            fil, col = random.randint(6,filas -2 ) ,  random.randint(6,columnas-2)
             while laberinto[fil][col] == " ":
                 fil, col = random.randint(6,columnas-2) ,  random.randint(6,columnas -2 )
             laberinto[fil][col] = "x"  # Salida
@@ -46,7 +46,7 @@ def generar_laberinto(filas, columnas):
 if __name__ == "__main__":
     n,m = 12,11
     laberintos = []
-    for i in range(20):
+    for i in range(200):
         lab = generar_laberinto(n,m)
         lab1 = np.array(lab)
         laberintos.append(lab1)

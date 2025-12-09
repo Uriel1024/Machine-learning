@@ -49,7 +49,7 @@ def generar_laberinto(filas, columnas):
 if __name__ == "__main__":
     n,m = 11,11
     laberintos = []
-    for i in range(20):
+    for i in range(200):
         lab = generar_laberinto(n,m)
         lab1 = np.array(lab)
         laberintos.append(lab1)
