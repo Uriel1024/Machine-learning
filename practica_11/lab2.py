@@ -20,15 +20,13 @@ def generar_laberinto(filas, columnas):
         else:
             laberinto[col][fil] = "@"
 
-
-
     def dfs(x, y):
         laberinto[x][y] = " "  # Celda libre
         random.shuffle(direcciones)  # Aleatorizar direcciones
         for dx, dy in direcciones:
             nx, ny = x + dx, y + dy
             if 1 <= nx < filas - 1 and 1 <= ny < columnas - 1:
-                if laberinto[nx][ny] == "#" or laberinto[nx][ny] == "x" or laberinto[nx][ny] == "$":
+                if laberinto[nx][ny] == "#" or laberinto[nx][ny] == "@":
                     # Romper pared intermedia
                     laberinto[x + dx // 2][y + dy // 2] = " "
                     dfs(nx, ny)
@@ -45,18 +43,29 @@ def generar_laberinto(filas, columnas):
 
     return laberinto
 
+def crear_recompensas(lab,n,m):
+    recompensas = [[0 for _ in range(m)]for _ in range(n)]
+    for i in range(n):
+        for j in range(m):
+            if lab[i][j] == '#':
+                recompensas[i][j] = -10
+            elif lab[i][j] == 'x':
+                recompensas[i][j] = -5
+            elif lab[i][j] == '@':
+                recompensas[i][j] = -20
+            elif lab[i][j] == '$':
+                recompensas[i][j] = 20
+            elif lab[i][j] == 'g':
+                recompensas[i][j] = 50
+            else: 
+                recompensas[i][j] = -1
+    return recompensas
+
 
 if __name__ == "__main__":
-    n,m = 11,11
-    laberintos = []
-    for i in range(200):
-        lab = generar_laberinto(n,m)
-        lab1 = np.array(lab)
-        laberintos.append(lab1)
-
-    file = open("laberintos2.txt","w+")
-    content = str(laberintos)
-    file.write(content)
-    file.close()
-    for i in laberintos:
-        print(f"\n\n{i}")
+    n, m = 11,11
+    lab = generar_laberinto(n,m)
+    recompensas = crear_recompensas(lab,n,m)
+    for i in lab:
+        print(i)
+    movimientos = [0,1,2,3]
